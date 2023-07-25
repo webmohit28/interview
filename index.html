@@ -26,7 +26,7 @@
                         <span>(Incident Location - 10)</span>
                     </div>
                     <div class="show-records">
-                        <p>Showing 1-4 of 4 Records</p>
+                        <p id="shwoRecord">Showing 1-4 of 4 Records</p>
                     </div>
                     <div class="record-per-page">
                         <select name="number" id="number">
@@ -59,7 +59,7 @@
                         </ul>
                     </div>
                     <div class="show-records">
-                        <p>Showing 1-4 of 4 Records</p>
+                        <p id="shwoRecordItem">Showing 1-4 of 4 Records</p>
                     </div>
                     <div class="record-per-page">
                         <select name="number" id="number">
@@ -128,19 +128,13 @@
                                     <input type="date" id="startdate" required>
                                 </div>
                                 <div class="input-field select">
-                                    <label class="label">Hr:</label>
-                                    <select name="hr" id="hr">
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
+                                    <label for="startHour" class="label">Hr:</label>
+                                    <select name="startHour" id="startHour">
                                     </select>
                                 </div>
                                 <div class="input-field select">
-                                    <label class="label">Min:</label>
-                                    <select name="min" id="min">
-                                        <option value="38">38</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
+                                    <label for="startMin" class="label">Min:</label>
+                                    <select name="startMin" id="startMin">
                                     </select>
                                 </div>
                             </div>
@@ -150,19 +144,13 @@
                                     <input type="date" id="targetdate" required>
                                 </div>
                                 <div class="input-field select">
-                                    <label class="label">Hr:</label>
-                                    <select name="hr" id="hr">
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
+                                    <label for="targetHour" class="label">Hr:</label>
+                                    <select name="targetHour" id="targetHour">
                                     </select>
                                 </div>
                                 <div class="input-field select">
-                                    <label class="label">Min:</label>
-                                    <select name="min" id="min">
-                                        <option value="38">38</option>
-                                        <option value="39">39</option>
-                                        <option value="40">40</option>
+                                    <label for="targetMin" class="label">Min:</label>
+                                    <select name="targetMin" id="targetMin">
                                     </select>
                                 </div>
                             </div>
@@ -172,19 +160,13 @@
                                     <input type="date" id="actualdate" required>
                                 </div>
                                 <div class="input-field select">
-                                    <label class="label">Hr:</label>
-                                    <select name="hr" id="hr">
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
+                                    <label for="actualHour" class="label">Hr:</label>
+                                    <select name="actualHour" id="actualHour">
                                     </select>
                                 </div>
                                 <div class="input-field select">
-                                    <label class="label">Min:</label>
-                                    <select name="min" id="min">
-                                        <option value="38">38</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
+                                    <label for="actualMin" class="label">Min:</label>
+                                    <select name="actualMin" id="actualMin">
                                     </select>
                                 </div>
                             </div>

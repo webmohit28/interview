@@ -9,19 +9,20 @@ $(document).ready(function () {
 // Retrieve tasks from local storage if available
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-function addDefaultTasks() {
-  const defaultTasks = [
-    { "poc": "dsd", "pocBrief": "sdsd", "startdate": "2023-07-18", "targetdate": "2023-07-27", "actualdate": "2023-07-28", "status": "pending" }, { "poc": "dsd", "pocBrief": "sdsd", "startdate": "2023-07-18", "targetdate": "2023-07-27", "actualdate": "2023-07-28", "status": "pending" }, { "poc": "dsd", "pocBrief": "sdsd", "startdate": "2023-07-18", "targetdate": "2023-07-27", "actualdate": "2023-07-28", "status": "pending" }, { "poc": "dsd", "pocBrief": "sdsd", "startdate": "2023-07-18", "targetdate": "2023-07-27", "actualdate": "2023-07-28", "status": "pending" }
+if (tasks.length === 0) {
+  tasks = [
+    { "poc": "dsd", "pocBrief": "sdsd", "startdate": "2023-07-18", "targetdate": "2023-07-27", "actualdate": "2023-07-28", "status": "done", "startHour": "16", "targetHour": "0", "actualHour": "12", "startMin": "50", "targetMin": "30", "actualMin": "30" }, { "poc": "dsd", "pocBrief": "sdsd", "startdate": "2023-07-18", "targetdate": "2023-07-27", "actualdate": "2023-07-28", "status": "pending", "startHour": "23", "targetHour": "0", "actualHour": "12", "startMin": "50", "targetMin": "30", "actualMin": "30" }, { "poc": "dsd", "pocBrief": "sdsd", "startdate": "2023-07-18", "targetdate": "2023-07-27", "actualdate": "2023-07-28", "status": "pending", "startHour": "23", "targetHour": "0", "actualHour": "12", "startMin": "50", "targetMin": "30", "actualMin": "30" }, { "poc": "dsd", "pocBrief": "sdsd", "startdate": "2023-07-18", "targetdate": "2023-07-27", "actualdate": "2023-07-28", "status": "pending", "startHour": "23", "targetHour": "0", "actualHour": "18", "startMin": "30", "targetMin": "30", "actualMin": "30" }
   ];
+  document.getElementById('shwoRecord').innerText = 'Showing 1 - 4 of 4 Records';
+  document.getElementById('shwoRecordItem').innerText = 'Showing 1 - 4 of 4 Records';
 
-  tasks.push(...defaultTasks);
-  saveTasksToLocalStorage();
-  populateTaskList();
 }
-addDefaultTasks();
+document.getElementById('shwoRecord').innerText = `Showing 1 - ${tasks.length} of ${tasks.length} Records`;
+document.getElementById('shwoRecordItem').innerText = `Showing 1 - ${tasks.length} of ${tasks.length} Records`;
+
 
 function saveTasksToLocalStorage() {
-  localStorage.setItem("tasks11", JSON.stringify(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 function addTask() {
@@ -31,6 +32,14 @@ function addTask() {
   const targetdate = document.getElementById("targetdate").value;
   const actualdate = document.getElementById("actualdate").value;
   const status = document.getElementById("status").value;
+
+  const startHour = document.getElementById("startHour").value;
+  const targetHour = document.getElementById("targetHour").value;
+  const actualHour = document.getElementById("actualHour").value;
+  const startMin = document.getElementById("startMin").value;
+  const targetMin = document.getElementById("targetMin").value;
+  const actualMin = document.getElementById("actualMin").value;
+
   // const time = document.getElementById("time").value;
 
   if (!poc || !pocBrief || !startdate || !targetdate || !actualdate || !status) {
@@ -38,24 +47,33 @@ function addTask() {
     return;
   }
 
-  const task = { poc, pocBrief, startdate, targetdate, actualdate, status };
+  const task = { poc, pocBrief, startdate, targetdate, actualdate, status, startHour, targetHour, actualHour, startMin, targetMin, actualMin };
+
   tasks.push(task);
   saveTasksToLocalStorage();
   populateTaskList();
+
+
   document.getElementById("poc").value = "";
   document.getElementById("pocBrief").value = "";
   document.getElementById("startdate").value = "";
   document.getElementById("targetdate").value = "";
   document.getElementById('actualdate').value = "";
   document.getElementById("status").value = "pending";
+  document.getElementById("startHour").value = "0";
+  document.getElementById("targetHour").value = "0";
+  document.getElementById("actualHour").value = "0";
+  document.getElementById("startMin").value = "0";
+  document.getElementById("targetMin").value = "0";
+  document.getElementById("actualMin").value = "0";
 }
 
 function deleteTask(index) {
   tasks.splice(index, 1);
-
   saveTasksToLocalStorage();
-
   populateTaskList();
+  document.getElementById('shwoRecord').innerText = `Showing 1 - ${tasks.length} of ${tasks.length} Records`;
+  document.getElementById('shwoRecordItem').innerText = `Showing 1 - ${tasks.length} of ${tasks.length} Records`;
 }
 
 function populateTaskList() {
@@ -89,27 +107,28 @@ function populateTaskList() {
             </div>
             <div class="box-content">
               <span class="label"><b>Start Date:</b></span>
-              <span class="text">${task.startdate} 6:30:00 PM</span>
+              <span class="text">${task.startdate} ${task.startHour < 13 ? task.startHour : (task.startHour - 12)}:${task.startMin}:00 ${task.startHour < 12 ? 'AM' : 'PM'}</span>
             </div>
             <div class="box-content">
               <span class="label"><b>Target Date:</b></span>
-              <span class="text">${task.targetdate} 6:30:00 PM</span>
+              20:15
+              <span class="text">${task.targetdate} ${task.targetHour < 13 ? task.targetHour : (task.targetHour - 12)}:${task.targetMin}:00 ${task.targetHour < 12 ? 'AM' : 'PM'}</span>
             </div>
             <div class="box-content">
               <span class="label"><b>Actual Date:</b></span>
-              <span class="text">${task.actualdate} 6:30:00 PM</span>
+              <span class="text">${task.actualdate} ${task.actualHour < 13 ? task.actualHour : (task.actualHour - 12)}:${task.actualMin}:00 ${task.actualHour < 12 ? 'AM' : 'PM'}</span>
             </div>
           </div>
         </div>`;
 
     taskList.appendChild(taskItem);
+    document.getElementById('shwoRecord').innerText = `Showing 1 - ${tasks.length} of ${tasks.length} Records`;
+    document.getElementById('shwoRecordItem').innerText = `Showing 1 - ${tasks.length} of ${tasks.length} Records`;
+
   });
 }
 
 populateTaskList();
-
-
-
 
 function saveReports() {
   const waitingPopup = document.getElementById("waitingPopup");
@@ -155,3 +174,31 @@ function showStatusOnDone() {
     document.getElementById("status").value = "pending";
   });
 }
+
+
+function showMinoptions(id) {
+  const selectMinutes = document.getElementById(id);
+  for (let i = 0; i <= 60; i++) {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = i;
+    selectMinutes.appendChild(option);
+  }
+}
+function showHouroptions(id) {
+  const selectHour = document.getElementById(id);
+  for (let i = 0; i <= 23; i++) {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = i;
+    selectHour.appendChild(option);
+  }
+}
+
+showMinoptions('targetMin');
+showMinoptions('startMin');
+showMinoptions('actualMin');
+
+showHouroptions('targetHour');
+showHouroptions('startHour');
+showHouroptions('actualHour');
